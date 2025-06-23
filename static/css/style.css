@@ -1,0 +1,261 @@
+/* static/css/style.css */
+
+/* --- Root Variables for Colors --- */
+:root {
+    --primary-color: #6C63FF; /* A vibrant, modern purple-blue */
+    --accent-color: #FF6B6B; /* A warm, engaging red/pink for highlights */
+    --bg-light: #f0f2f5; /* Very light gray for background */
+    --text-dark: #333d51; /* Dark blue-gray for main text */
+    --text-muted-light: #6c7a89; /* Softer gray for muted text */
+    --card-bg: #ffffff; /* Pure white for cards */
+    --border-color: #e0e6ed; /* Light gray for borders */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Soft shadow */
+    --hover-bg: rgba(108, 99, 255, 0.08); /* Light tint of primary color for hover */
+    --active-border: var(--primary-color); /* Primary color border for active elements */
+
+    /* New background gradient colors for animation */
+    --gradient-color-1: #e0e6f0; /* Light cool gray */
+    --gradient-color-2: #edf2f8; /* Even lighter cool gray */
+    --gradient-color-3: #f5f7fa; /* Very light, almost white */
+    --gradient-color-4: #e8f0f5; /* Slightly bluer light gray */
+}
+
+/* --- General Body and Typography --- */
+body {
+    font-family: 'Lato', sans-serif; /* Default body font */
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scrollbar on resize */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    display: flex;
+    flex-direction: column;
+
+    /* --- ANIMATED BACKGROUND STYLES --- */
+    background: linear-gradient(
+        135deg, /* Angle of the gradient */
+        var(--gradient-color-1) 0%,
+        var(--gradient-color-2) 25%,
+        var(--gradient-color-3) 50%,
+        var(--gradient-color-4) 75%,
+        var(--gradient-color-1) 100% /* Loop back to first color for seamless animation */
+    );
+    background-size: 400% 400%; /* Make the background larger than the viewport */
+    animation: gradientShift 20s ease infinite alternate; /* Apply the animation */
+    /* --- END ANIMATED BACKGROUND STYLES --- */
+}
+
+/* --- Keyframes for the background animation --- */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif; /* Heading font */
+    color: var(--text-dark);
+    margin-bottom: 0.5em;
+    font-weight: 700; /* Bolder headings */
+}
+
+.lead {
+    color: var(--text-muted-light); /* Make lead text softer */
+}
+
+/* Adjust max-width for extremely large screens for readability */
+.container-fluid {
+    max-width: 1400px; /* Example max width for content */
+    margin-left: auto;
+    margin-right: auto;
+    flex-grow: 1; /* Allow container to grow and push footer down */
+}
+
+/* --- Buttons --- */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-weight: 600;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    border-radius: 0.5rem; /* Match card radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+}
+
+.btn-primary:hover {
+    background-color: #514bcf; /* Slightly darker primary on hover */
+    border-color: #514bcf;
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly larger shadow */
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    font-weight: 600;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    border-radius: 0.5rem;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    transform: translateY(-2px);
+}
+
+.btn-success { /* For download button */
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    font-weight: 600;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-success:hover {
+    background-color: #e05e5e; /* Slightly darker accent on hover */
+    border-color: #d15656;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Card Styling --- */
+.card {
+    border: none; /* Remove default card border */
+    border-radius: 1rem; /* More rounded corners for softness */
+    box-shadow: 0 1rem 3rem var(--shadow-color); /* More pronounced, softer shadow */
+    background-color: var(--card-bg);
+}
+
+/* --- Form Control Enhancements --- */
+.form-control-lg {
+    border-radius: 0.5rem; /* Match button/card radius */
+    padding: 0.75rem 1.25rem; /* Slightly more padding */
+    font-size: 1.1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.05); /* Subtle inner shadow */
+}
+
+.form-control-lg:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(108, 99, 255, 0.25); /* Primary color focus ring */
+    outline: none;
+}
+
+textarea.form-control {
+    min-height: 300px; /* Make textarea taller by default */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+
+/* --- Feature Cards (The Options) --- */
+.feature-card {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid var(--border-color) !important;
+    border-radius: 0.75rem; /* Match card radius */
+    min-height: 140px; /* Slightly taller cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+}
+
+.feature-card:hover {
+    background-color: var(--hover-bg);
+    border-color: var(--primary-color) !important;
+    transform: translateY(-5px); /* More pronounced lift */
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15); /* More significant shadow */
+}
+
+.feature-card.active {
+    background-color: var(--hover-bg);
+    border-color: var(--active-border) !important;
+    box-shadow: 0 0.75rem 1.75rem var(--shadow-color);
+    transform: scale(1.03); /* Slightly larger when active */
+}
+
+.feature-card i {
+    font-size: 2.5em; /* Slightly larger icons */
+    margin-bottom: 0.75rem;
+    color: var(--primary-color); /* Default icon color to primary, specific overrides below */
+}
+
+/* Specific icon colors - using Bootstrap's text utilities, mapping to new palette where possible */
+.feature-card .text-info { color: #17a2b8 !important; } /* Can keep some Bootstrap defaults if they fit */
+.feature-card .text-warning { color: #ffc107 !important; }
+.feature-card .text-danger { color: #dc3545 !important; }
+.feature-card .text-success { color: #28a745 !important; }
+.feature-card .text-primary { color: var(--primary-color) !important; } /* Override Bootstrap primary */
+.feature-card .text-secondary { color: var(--text-muted-light) !important; } /* Override Bootstrap secondary */
+
+
+/* --- Footer --- */
+footer {
+    padding: 1.5rem 0;
+    margin-top: auto; /* Push footer to the bottom */
+    font-size: 0.9em;
+    color: var(--text-muted-light);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991.98px) { /* Large devices (laptops) and down */
+    .col-lg-3 {
+        flex: 0 0 auto;
+        width: 33.33333333%; /* Make them 3 per row on LG and smaller */
+    }
+    .feature-card {
+        min-height: 130px; /* Adjust height */
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 767.98px) { /* Medium devices (tablets) and down */
+    .col-md-4 {
+        flex: 0 0 auto;
+        width: 50%; /* Make them 2 per row on MD and smaller */
+    }
+    h1 {
+        font-size: 2.5em; /* Smaller h1 */
+    }
+    .lead {
+        font-size: 1.1em; /* Smaller lead text */
+    }
+    .feature-card {
+        min-height: 120px;
+        padding: 1rem;
+    }
+    .feature-card i {
+        font-size: 2em; /* Slightly smaller icons */
+    }
+}
+
+@media (max-width: 575.98px) { /* Small devices (phones) and down */
+    .col-6 {
+        width: 50%; /* Ensure 2 per row on XS */
+    }
+    .feature-card span.fw-bold {
+        font-size: 0.85rem; /* Smaller font for main text */
+    }
+    .feature-card small.text-muted {
+        font-size: 0.65rem; /* Even smaller for subtext */
+    }
+    .feature-card i {
+        font-size: 1.8em !important; /* Slightly smaller icons */
+    }
+    .container-fluid {
+        padding-left: 1rem; /* Consistent padding on smaller screens */
+        padding-right: 1rem;
+    }
+    h1 {
+        font-size: 2em;
+    }
+}

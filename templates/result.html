@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result - EduGenie 🧙‍♂️</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container-fluid my-5 px-md-5 px-3">
+    <header class="text-center mb-5">
+        <h1><i class="fas fa-magic text-primary"></i> EduGenie</h1>
+        <p class="lead text-muted">Your intelligent partner for creating educational content.</p>
+    </header>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card p-4 shadow-sm">
+                <h3 class="card-title mb-4">✅ Your Generated Content is Here!</h3>
+                <div class="mb-4">
+                    <label for="contentArea" class="form-label fw-bold">Generated Content:</label>
+                    <textarea id="contentArea" class="form-control" rows="25" readonly>{{ content }}</textarea>
+                </div>
+                <div class="d-flex flex-wrap justify-content-start gap-2">
+                    <a href="{{ url_for('download', filename=filename) }}" class="btn btn-success btn-lg">📥 Download as PDF</a>
+                    <a href="/" class="btn btn-secondary btn-lg">🔁 Generate More / Go Back Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 text-muted">
+      <p>&copy; 2025 ExamForge. Powered by AI.</p>
+    </footer>
+  </div>
+</body>
+</html>
