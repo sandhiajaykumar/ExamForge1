@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ExamForge 🧙‍♂️ – Your Smart Learning Assistant</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 </head>
 <body>
   <div class="container-fluid my-5 px-md-5 px-3">
@@ -25,67 +22,67 @@
         <div class="card p-4 shadow-sm">
           <h3 class="card-title text-center mb-4">Generate Your Study Materials</h3>
           <form method="POST" action="/generate" enctype="multipart/form-data" id="generationForm">
+            <!-- File Upload -->
             <div class="mb-4">
-              <label for="fileInput" class="form-label fw-bold">1. Upload your document (PDF or DOCX or TXT):</label>
+              <label for="fileInput" class="form-label fw-bold">1. Upload your document (PDF, DOCX, or TXT):</label>
               <input type="file" name="file" id="fileInput" required class="form-control form-control-lg">
             </div>
 
+            <!-- Feature Selection -->
             <div class="mb-4">
               <label class="form-label fw-bold">2. Choose a feature:</label>
               <div class="row g-3 justify-content-center">
+                <!-- Feature Cards -->
+                {% for feature in [
+                  {"key": "mcq", "icon": "question-circle", "color": "info", "title": "MCQ Generator", "desc": "Multiple Choice Questions"},
+                  {"key": "assignment", "icon": "file-alt", "color": "warning", "title": "Assignment Generator", "desc": "Long Answer Questions"},
+                  {"key": "project_ideas", "icon": "lightbulb", "color": "danger", "title": "Project Ideas", "desc": "Creative Concepts"},
+                  {"key": "summary_flashcard", "icon": "book-reader", "color": "success", "title": "Summarizer & Flashcards", "desc": "Key Points & Quizzes"},
+                  {"key": "question_paper", "icon": "clipboard-list", "color": "primary", "title": "Question Paper", "desc": "Mixed Format Exam"},
+                  {"key": "default_summary", "icon": "file-word", "color": "secondary", "title": "Simple Summarizer", "desc": "Just Summarize"}
+                ] %}
                 <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2">
-                  <div class="feature-card text-center p-3 border rounded h-100 d-flex flex-column justify-content-center align-items-center" data-feature="mcq">
-                    <i class="fas fa-question-circle fa-2x mb-2 text-info"></i>
-                    <span class="fw-bold">MCQ Generator</span>
-                    <small class="text-muted mt-1">Multiple Choice Questions</small>
+                  <div class="feature-card text-center p-3 border rounded h-100 d-flex flex-column justify-content-center align-items-center" data-feature="{{ feature.key }}">
+                    <i class="fas fa-{{ feature.icon }} fa-2x mb-2 text-{{ feature.color }}"></i>
+                    <span class="fw-bold">{{ feature.title }}</span>
+                    <small class="text-muted mt-1">{{ feature.desc }}</small>
                   </div>
                 </div>
-                <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2">
-                  <div class="feature-card text-center p-3 border rounded h-100 d-flex flex-column justify-content-center align-items-center" data-feature="assignment">
-                    <i class="fas fa-file-alt fa-2x mb-2 text-warning"></i>
-                    <span class="fw-bold">Assignment Generator</span>
-                    <small class="text-muted mt-1">Long Answer Questions</small>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2">
-                  <div class="feature-card text-center p-3 border rounded h-100 d-flex flex-column justify-content-center align-items-center" data-feature="project_ideas">
-                    <i class="fas fa-lightbulb fa-2x mb-2 text-danger"></i>
-                    <span class="fw-bold">Project Ideas</span>
-                    <small class="text-muted mt-1">Creative Concepts</small>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2">
-                  <div class="feature-card text-center p-3 border rounded h-100 d-flex flex-column justify-content-center align-items-center" data-feature="summary_flashcard">
-                    <i class="fas fa-book-reader fa-2x mb-2 text-success"></i>
-                    <span class="fw-bold">Summarizer & Flashcards</span>
-                    <small class="text-muted mt-1">Key Points & Quizzes</small>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2">
-                  <div class="feature-card text-center p-3 border rounded h-100 d-flex flex-column justify-content-center align-items-center" data-feature="question_paper">
-                    <i class="fas fa-clipboard-list fa-2x mb-2 text-primary"></i>
-                    <span class="fw-bold">Question Paper</span>
-                    <small class="text-muted mt-1">Mixed Format Exam</small>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2">
-                  <div class="feature-card text-center p-3 border rounded h-100 d-flex flex-column justify-content-center align-items-center" data-feature="default_summary">
-                    <i class="fas fa-file-word fa-2x mb-2 text-secondary"></i>
-                    <span class="fw-bold">Simple Summarizer</span>
-                    <small class="text-muted mt-1">Just Summarize</small>
-                  </div>
-                </div>
+                {% endfor %}
               </div>
             </div>
 
+            <!-- Dynamic Quantity Section -->
             <div class="mb-4" id="dynamicQuantitySection" style="display: none;">
-                <label for="numItems" class="form-label fw-bold" id="quantityLabel">3. Number of Items:</label>
-                <input type="number" name="num_items" id="numItems" class="form-control form-control-lg" min="1" value="5">
-                <small class="text-muted" id="quantityHint"></small>
+              <label for="numItems" class="form-label fw-bold" id="quantityLabel">3. Number of Items:</label>
+              <input type="number" name="num_items" id="numItems" class="form-control form-control-lg" min="1" value="5">
+              <small class="text-muted" id="quantityHint"></small>
             </div>
 
+            <!-- Hidden feature field -->
             <input type="hidden" name="feature" id="selectedFeature" required>
 
+            <!-- Extra Fields for Question Paper -->
+            <div id="questionPaperMeta" style="display: none;">
+              <div class="mb-3">
+                <label for="collegeName" class="form-label fw-bold">4. College Name:</label>
+                <input type="text" name="college_name" id="collegeName" class="form-control form-control-lg" placeholder="Enter your college name">
+              </div>
+              <div class="mb-3">
+                <label for="examTitle" class="form-label fw-bold">5. Examination Title:</label>
+                <input type="text" name="exam_title" id="examTitle" class="form-control form-control-lg" placeholder="e.g., Mid Term Exam - 2025">
+              </div>
+              <div class="mb-3">
+                <label for="subjectName" class="form-label fw-bold">6. Subject Name:</label>
+                <input type="text" name="subject_name" id="subjectName" class="form-control form-control-lg" placeholder="e.g., Mathematics">
+              </div>
+              <div class="mb-3">
+                <label for="examDate" class="form-label fw-bold">7. Examination Date:</label>
+                <input type="date" name="exam_date" id="examDate" class="form-control form-control-lg">
+              </div>
+            </div>
+
+            <!-- Submit Button -->
             <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">Generate Content!</button>
           </form>
         </div>
@@ -111,75 +108,73 @@
       const numItemsInput = document.getElementById('numItems');
       const quantityHint = document.getElementById('quantityHint');
 
-      // Configuration for each feature's quantity input
+      // Question Paper Meta
+      const questionPaperMetaSection = document.getElementById('questionPaperMeta');
+
+      // Feature quantity rules
       const featureQuantities = {
-          'mcq': { label: '3. Number of MCQs:', default: 10, max: 50, hint: 'Enter the desired number of multiple choice questions (1-50).' },
-          'assignment': { label: '3. Number of Questions:', default: 3, max: 10, hint: 'Enter the desired number of assignment questions (1-10).' },
-          'project_ideas': { label: '3. Number of Ideas:', default: 3, max: 10, hint: 'Enter the desired number of project ideas (1-10).' },
-          'summary_flashcard': { label: '3. Number of Flashcards/Quizzes:', default: 5, max: 20, hint: 'Enter the desired number of flashcards or quiz questions (1-20).' },
-          // 'question_paper' and 'default_summary' don't have a simple single quantity, so they won't show this section.
+        'mcq': { label: '3. Number of MCQs:', default: 10, max: 50, hint: 'Enter the desired number of multiple choice questions (1–50).' },
+        'assignment': { label: '3. Number of Questions:', default: 3, max: 10, hint: 'Enter the desired number of assignment questions (1–10).' },
+        'project_ideas': { label: '3. Number of Ideas:', default: 3, max: 10, hint: 'Enter the desired number of project ideas (1–10).' },
+        'summary_flashcard': { label: '3. Number of Flashcards/Quizzes:', default: 5, max: 20, hint: 'Enter the desired number of flashcards or quiz questions (1–20).' },
       };
 
-      // Initialize submit button to be disabled until a file and feature are selected
       submitButton.disabled = true;
 
-      // Function to check if form can be submitted
       function checkFormValidity() {
-          submitButton.disabled = !(fileInput.value && selectedFeatureInput.value);
+        submitButton.disabled = !(fileInput.value && selectedFeatureInput.value);
       }
 
       featureCards.forEach(card => {
-        card.addEventListener('click', function() {
-          // Remove 'active' class from all cards
+        card.addEventListener('click', function () {
           featureCards.forEach(fc => fc.classList.remove('active'));
-
-          // Add 'active' class to the clicked card
           this.classList.add('active');
 
-          // Set the value of the hidden input
           const selectedFeature = this.dataset.feature;
           selectedFeatureInput.value = selectedFeature;
 
-          // Handle Dynamic Quantity Section Visibility and Properties
+          // Dynamic Quantity
           if (featureQuantities[selectedFeature]) {
-              const config = featureQuantities[selectedFeature];
-              quantityLabel.textContent = config.label;
-              numItemsInput.value = config.default;
-              numItemsInput.setAttribute('max', config.max);
-              numItemsInput.setAttribute('required', 'true'); // Make it required when visible
-              quantityHint.textContent = config.hint;
-              dynamicQuantitySection.style.display = 'block'; // Show it
+            const config = featureQuantities[selectedFeature];
+            quantityLabel.textContent = config.label;
+            numItemsInput.value = config.default;
+            numItemsInput.max = config.max;
+            quantityHint.textContent = config.hint;
+            dynamicQuantitySection.style.display = 'block';
           } else {
-              dynamicQuantitySection.style.display = 'none'; // Hide it
-              numItemsInput.removeAttribute('required'); // Remove required if hidden
-              numItemsInput.value = ''; // Clear value when hidden
+            dynamicQuantitySection.style.display = 'none';
+            numItemsInput.value = '';
           }
 
-          checkFormValidity(); // Re-check validity after selecting feature
+          // Show or hide extra question paper metadata fields
+          if (selectedFeature === 'question_paper') {
+            questionPaperMetaSection.style.display = 'block';
+          } else {
+            questionPaperMetaSection.style.display = 'none';
+            document.getElementById('collegeName').value = '';
+            document.getElementById('examTitle').value = '';
+            document.getElementById('subjectName').value = '';
+            document.getElementById('examDate').value = '';
+          }
+
+          checkFormValidity();
         });
       });
 
-      // Add event listener for file input change
       fileInput.addEventListener('change', checkFormValidity);
 
-      // Basic validation on form submission
-      generationForm.addEventListener('submit', function(event) {
-        if (!selectedFeatureInput.value) {
-            alert('Please select a feature before generating content!');
-            event.preventDefault(); // Stop the form from submitting
+      generationForm.addEventListener('submit', function (event) {
+        if (!selectedFeatureInput.value || !fileInput.value) {
+          alert('Please complete all required fields.');
+          event.preventDefault();
         }
-        if (!fileInput.value) {
-            alert('Please upload a file before generating content!');
-            event.preventDefault(); // Stop the form from submitting
-        }
-        // Specific validation for dynamic quantity input if visible and required
-        if (dynamicQuantitySection.style.display === 'block' && numItemsInput.hasAttribute('required') && !numItemsInput.value) {
-            alert('Please enter the desired number of items!');
-            event.preventDefault();
+
+        if (dynamicQuantitySection.style.display === 'block' && !numItemsInput.value) {
+          alert('Please enter the number of items!');
+          event.preventDefault();
         }
       });
 
-      // Initial check on page load
       checkFormValidity();
     });
   </script>
